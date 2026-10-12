@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Интерактивная виртуальная лаборатория АгроУМ: выращивайте базилик, редис, горох и подсолнечник в течение 30 дней, ставьте опыты и наблюдайте изменения." />
+  <title>АгроУМ — Лаборатория семечка</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner wrap">
+      <a class="brand" href="#top" aria-label="АгроУМ — начало страницы"><img src="assets/agroum-logo.png" alt="АгроУМ" /></a>
+      <div class="header-right"><span class="header-tag">Виртуальная научная лаборатория</span><span class="edition">30 дней открытий</span></div>
+    </div>
+  </header>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div><span class="eyebrow"><span class="eyebrow-dot"></span> ИССЛЕДОВАТЕЛЬСКАЯ МИССИЯ № 01</span><h1>Что произойдёт <em>с семечком?</em></h1><p>Выращивай растение, меняй условия, устраивай научные эксперименты. Здесь можно ошибаться — и исследовать причины!</p></div>
+      <div class="hero-illustration" aria-hidden="true"><svg viewBox="0 0 190 108" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="103" cy="58" r="47" fill="#D9EFC9"/><path d="M48 90 Q77 70 108 91 T178 89" stroke="#65AB4A" stroke-width="5" stroke-linecap="round"/><path d="M101 94 Q94 64 105 28" stroke="#55A541" stroke-width="7" stroke-linecap="round"/><path d="M100 51 C62 15 52 42 95 62Z" fill="#7BDD17" stroke="#3A842D" stroke-width="2"/><path d="M104 35 C144 2 160 30 109 48Z" fill="#B0EB42" stroke="#3A842D" stroke-width="2"/><circle cx="160" cy="19" r="5" fill="#57A0C8"/><path d="M34 30 l8 0 M38 26 v8" stroke="#7BDD17" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="74" r="4" fill="#57A0C8"/></svg></div>
+    </section>
+
+    <section class="species-section" aria-labelledby="species-title">
+      <div class="section-heading"><h2 id="species-title">1. Выбери культуру</h2><span>Каждая растёт по-своему</span></div>
+      <div class="species-grid" id="species-grid" role="group" aria-label="Выбор растения"></div>
+      <div class="subnote" id="species-note"></div>
+    </section>
+
+    <section class="main-grid" aria-label="Основной симулятор">
+      <div class="left-column">
+        <article class="card plant-card">
+          <div class="card-top"><div><span class="overline">ОКНО НАБЛЮДЕНИЯ</span><h2 id="plant-title">Базилик</h2></div><div class="day-pill"><small>ДЕНЬ</small><strong id="day-label">0 / 30</strong></div></div>
+          <div class="scene-toolbar"><div class="tab-switch" role="group" aria-label="Режим наблюдения"><button id="tab-plant" class="tab active" type="button" aria-pressed="true">Весь росток</button><button id="tab-roots" class="tab" type="button" aria-pressed="false">Под землёй</button><button id="tab-seed" class="tab" type="button" aria-pressed="false">Внутри семени</button></div><button id="export-scene" type="button" class="text-btn scene-export">↓ Сохранить рисунок SVG</button></div>
+          <div class="plant-scene" id="plant-scene" role="img" aria-label="Схематическое изображение растения, его корней и почвы"></div>
+          <div class="condition-legend"><span><i class="legend-pill healthy"></i> Живое растение</span><span><i class="legend-pill root"></i> Корневая система</span><span><i class="legend-pill moisture"></i> Влажность субстрата</span></div>
+          <div class="stats-grid" aria-label="Показатели растения">
+            <div class="stat"><span>Высота</span><strong id="stat-height">0 см</strong><small>над почвой</small></div>
+            <div class="stat"><span>Состояние</span><strong id="stat-health">100%</strong><small>условный индекс</small></div>
+            <div class="stat"><span>Корни</span><strong id="stat-roots">0 см</strong><small>условная длина</small></div>
+            <div class="stat"><span>Влажность</span><strong id="stat-moisture">55%</strong><small>индекс субстрата</small></div>
+          </div>
+          <div id="diagnosis" class="diagnosis" aria-live="polite"></div>
+        </article>
+
+        <article class="card timeline-card">
+          <div class="card-top compact"><div><span class="overline">МАШИНА ВРЕМЕНИ</span><h2>30 дней жизни растения</h2></div><button class="text-btn" id="start-over" type="button" title="Начать новый эксперимент">↺ Сброс</button></div>
+          <label for="day-slider" class="input-caption">Выбери день эксперимента</label>
+          <input id="day-slider" type="range" min="0" max="30" step="1" value="0" aria-label="День от 0 до 30" />
+          <div class="ruler"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span><span>25</span><span>30</span></div>
+          <div class="timeline-controls"><button type="button" class="secondary-btn" id="prev-day">← День назад</button><button type="button" class="secondary-btn" id="play-button">▶ По дням</button><button type="button" class="primary-btn" id="next-day">День вперёд →</button></div>
+          <div class="event-tape" id="event-tape" aria-label="Состояние растения в течение месяца"></div>
+          <p class="hint">Изменения параметров действуют с выбранного дня и далее. Прошлые дни не переписываются. При изменении условий на прошедшей дате прогноз будущего пересчитывается.</p>
+        </article>
+      </div>
+
+      <aside class="right-column">
+        <section class="card controls-card" aria-labelledby="controls-title">
+          <div class="section-heading inset"><div><span class="overline">ПУЛЬТ АГРОНОМА</span><h2 id="controls-title">2. Управляй условиями</h2></div></div>
+          <div class="control"><label for="water-input"><span><span class="control-icon">◉</span> Полив за день</span><output id="water-value">9 мл</output></label><input id="water-input" type="range" min="0" max="45" step="1" value="9"/><div class="ends"><span>Без полива</span><span>Сильный полив</span></div></div>
+          <div class="control"><label for="temperature-input"><span><span class="control-icon warm">☀</span> Температура</span><output id="temperature-value">24 °C</output></label><input id="temperature-input" type="range" min="5" max="40" step="1" value="24"/><div class="ends"><span>Холодно</span><span>Жарко</span></div></div>
+          <div class="control"><label for="light-input"><span><span class="control-icon sunny">✳</span> Освещение</span><output id="light-value">12 ч</output></label><input id="light-input" type="range" min="0" max="18" step="1" value="12"/><div class="ends"><span>Темнота</span><span>Много света</span></div></div>
+          <div class="control"><label for="nutrient-input"><span><span class="control-icon green">✦</span> Минеральное питание</span><output id="nutrient-value">50%</output></label><input id="nutrient-input" type="range" min="0" max="100" step="5" value="50"/><div class="ends"><span>Дефицит</span><span>Избыток</span></div></div>
+          <div class="control select-control"><label for="drain-input"><span><span class="control-icon earth">▤</span> Субстрат / дренаж</span></label><select id="drain-input"><option value="normal">Обычный субстрат</option><option value="poor">Плотный, плохой дренаж</option><option value="fast">Рыхлый, быстрый дренаж</option></select></div>
+          <p class="hint controls-hint">Полив, свет, температура и питание задаются по дням. Дренаж — свойство контейнера, оно влияет на весь эксперимент.</p>
+        </section>
+        <section class="card events-card"><span class="overline">ПОПРОБУЙ ПОМЕНЯТЬ СУДЬБУ РАСТЕНИЯ</span><h2>3. Научные происшествия</h2><p>Выбери происшествие и пролистай следующие дни.</p><div class="events-grid"><button class="event-btn drought" type="button" data-event="drought"><span class="event-emoji">☀</span><strong>Засуха</strong><small>6 дней без воды</small></button><button class="event-btn flood" type="button" data-event="flood"><span class="event-emoji">≋</span><strong>Перелив</strong><small>6 дней много воды</small></button><button class="event-btn hot" type="button" data-event="heat"><span class="event-emoji">♨</span><strong>Жара</strong><small>6 дней, 38 °C</small></button><button class="event-btn dark" type="button" data-event="dark"><span class="event-emoji">☾</span><strong>Темнота</strong><small>8 дней почти без света</small></button><button class="event-btn hungry" type="button" data-event="hungry"><span class="event-emoji">◇</span><strong>Нет питания</strong><small>8 дней дефицита</small></button><button class="event-btn feed" type="button" data-event="feed"><span class="event-emoji">✦</span><strong>Избыток солей</strong><small>7 дней перегруза</small></button></div><button class="rescue-btn" id="rescue-button" type="button">✚ Попытаться спасти растение</button><p class="hint">Спасение улучшает условия, но не отменяет прошлые повреждения. Оно может не сработать, если стресс слишком сильный.</p></section>
+      </aside>
+    </section>
+
+    <section class="results-section" aria-labelledby="results-title"><div class="section-heading"><h2 id="results-title">4. Лабораторный журнал</h2><span>Сравни с контрольным образцом</span></div><div class="results-grid"><article class="card chart-card"><div class="chart-top"><div><span class="overline">ГРАФИК ИССЛЕДОВАНИЯ</span><h3 id="chart-heading">Изменение высоты</h3></div><div class="tab-switch small"><button type="button" data-chart="height" class="tab active" aria-pressed="true">Рост</button><button type="button" data-chart="health" class="tab" aria-pressed="false">Здоровье</button><button type="button" data-chart="moisture" class="tab" aria-pressed="false">Влага</button></div></div><div id="chart" class="chart-area" role="img" aria-label="График результатов исследования"></div><div class="chart-key"><span><i class="legend-line actual"></i> Твоё растение</span><span><i class="legend-line baseline"></i> Контроль (без происшествий)</span></div><div class="comparison" id="comparison"></div></article><article class="card notes-card"><span class="overline">ДНЕВНИК ИССЛЕДОВАТЕЛЯ</span><h3>Что произошло?</h3><div class="journal-day" id="journal-day"></div><div class="journal-history" id="journal-history"></div><div class="download-row"><button type="button" class="secondary-btn" id="export-csv">↓ Скачать таблицу CSV</button><button type="button" class="secondary-btn" id="export-json">↓ Сохранить опыт JSON</button></div><label for="import-json" class="upload-label">↑ Загрузить сохранённый опыт <input id="import-json" type="file" accept=".json,application/json" hidden /></label><p class="hint">Эксперимент также автоматически сохраняется в этом браузере. На другом устройстве используй файл JSON.</p></article></div></section>
+
+    <section class="teacher-section"><div class="teacher-mark">?</div><div><h2>Для юных исследователей АгроУМ</h2><p><strong>Предложи гипотезу:</strong> что будет, если на 12-й день перестать поливать растение? Проверь на симуляторе, затем выращивай контрольный и опытный образцы в настоящей лаборатории. Сравни то, что предсказывала модель, с результатами наблюдения.</p><details><summary>Как устроена модель и что важно знать педагогу</summary><div class="teacher-details"><p>Это <strong>учебная, упрощённая модель</strong>, а не точный прогноз урожайности и не инструкция выращивания. Модель учитывает накопление воды, её расход, примерное влияние тепла и света, дефицит кислорода при заливе, повреждение корней и замедленное восстановление. При сильном стрессе растение может погибнуть. Результат рассчитывается детерминированно, без случайных чисел.</p><p>У культур различаются условные скорость прорастания, рост и тип морфологии: у гороха семядоли остаются под землёй, у базилика, редиса и подсолнечника они выносятся над поверхностью; редис формирует утолщённый корень. Реальные растения также зависят от сорта, возраста семян, освещённости (а не только часов света), температуры субстрата, размера ёмкости, состава почвы и болезней.</p><p>Числа «здоровье», «кислород» и «минеральное питание» — условные индексы. Значения полива в мл привязаны к условной маленькой ёмкости, а не к конкретным горшкам в лаборатории. Для научного занятия сначала выдвигайте гипотезу, а потом проверяйте её настоящим наблюдением.</p></div></details></div></section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><div><strong>АгроУМ</strong> · Мир становится открытием для ребёнка</div><div>Обучающий симулятор · 3–12 лет с педагогом, старше — самостоятельно</div></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
